@@ -1,0 +1,131 @@
+﻿@using Microsoft.AspNetCore.Http
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Quản lý thư viện</title>
+
+
+    <environment include="Development">
+        <link rel="stylesheet" type="text/css" href="~/font-awesome/font-awesome.min.css">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/Stylecss.css" />
+        <link href="~/css/stylepage.css" rel="stylesheet" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href=""
+              asp-fallback-href="~/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+
+</head>
+<body>
+    <header class="nn-header row">
+        <h1 class="nn-company">Thư viện</h1>
+        <h5 class="nn-slogan">Nguồn kiến thức vô tận</h5>
+        <img class="nn-logo" src="~/css/book1.png" />
+    </header>
+
+    <div class="navbar navbar-inverse row">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a asp-action="Index" asp-controller="Home">Trang chủ</a></li>
+                <li><a asp-action="GioiThieu" asp-controller="Home">Giới thiệu</a></li>
+               <!-- <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Loại Sách <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="">Khoa học</a></li>
+                        <li><a href="">Văn học</a></li>
+                        <li><a href="">Truyện tranh</a></li>
+                        <li><a href="">Sách giáo khoa</a></li>
+                        <li><a href="">Sách kinh hoanh</a></li>
+                        <li><a href="">Tiểu thuyết</a></li>
+                        <li><a href="">Sách giáo khoa</a></li>
+                    </ul>
+                </li>-->
+                <li><a asp-action="GopY" asp-controller="Home">Góp ý</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tài khoản <span class="caret"></span></a>
+                    @if (Context.Session.GetInt32("IDDocGia") == null)
+                    {
+                        <ul class="dropdown-menu">
+                            <li><a href="~/DocGia/Login">Đăng nhập</a></li>
+                        </ul>
+                    }
+                    @if (Context.Session.GetInt32("IDDocGia") != null)
+                    {
+                        <ul class="dropdown-menu">
+                            <li><a href="~/DocGia/Details/@Context.Session.GetInt32("IDDocGia")">Thông tin tài khoản</a></li>
+                            <li><a href="~/DocGia/DanhSach/@Context.Session.GetInt32("IDDocGia")">Lịch sử đặt sách</a></li>
+                            <li><a href="~/DocGia/Logout">Đăng xuất</a></li>
+                        </ul>
+                    }
+                </li>
+
+            </ul>
+            <div class="nav navbar-nav navbar-right">
+                @using (Html.BeginForm("timSach", "Home")) {
+                    <input style="margin-top:10px;color: black" type="text" name="keysearch" value="" placeholder="Tìm kiếm sách/ tác giả..."/>
+                    <input style="margin-top:10px" type="submit" name="name" value="Tìm Kiếm" />
+                }
+               
+               
+            </div>
+        </div>
+    </div>
+
+    <div class="nn-sheet row">
+
+        <div class="body-content">
+            @RenderBody()
+            <iframe style="border: medium; height: 200px; width: 100%;" name="iframe_main"></iframe>
+        </div>
+
+       
+    </div>
+
+    <partial name="_CookieConsentPartial" />
+
+    <div class="container body-content">
+        
+        <hr />
+        <footer>
+            <br /><br /><br />
+            <p>&copy; 2018 - QuanLyThuVien - CaoQuangKhai</p>
+        </footer>
+    </div>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

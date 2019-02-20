@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewData["Title"] = "GopY";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="yeucau">
+    <label>Độc giả yêu cầu thư viện thêm sách mới:</label>
+    @using (Html.BeginForm("Create", "YeuCauThemSach"))
+    {
+        <div class="form-group">
+            <input type="text" name="TenSach" value="" placeholder="Tên sách" />
+            <input type="text" name="TenTacGia" value="" placeholder="tên tác giả">
+            <input type="submit" name="name" value="Gửi đề xuất" />
+        </div>
+    }
+</div>

@@ -1,0 +1,24 @@
+﻿
+@model IEnumerable<QuanLyThuVien.ViewModels.viewSach>
+
+@{
+    ViewData["Title"] = "Trang chủ";
+}
+<br />
+
+@foreach (var item in Model)
+{
+<div class="col-lg-4">
+    <div class="item">
+        <div class="img"> <img src="~/HinhAnh/@item.HinhAnh" alt=""></div>
+        <div class="name">
+            @Html.ActionLink(item.TenSach, "Details", "Sach", new { id = item.IDSach })
+        </div>
+        <div class="tentacgia">@item.TacGia</div>
+        <div class="price">Tiền đặt cọc:&nbsp; @item.TienMua vnd</div>
+        <div class="price">Giá thuê sách:&nbsp; @item.TienMuon vnd</div>
+       
+    </div>
+</div>
+    
+}

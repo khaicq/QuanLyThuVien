@@ -1,0 +1,97 @@
+﻿@model IEnumerable<QuanLyThuVien.Models.DocGia>
+
+@{
+    ViewData["Title"] = "Danh sách độc giả";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Quản lý danh sách độc giả</h2>
+
+<div class="container-yeucau">
+    <div class="xulyyeucau">
+        <p>Xử lý mượn sách</p>
+        @using (Html.BeginForm("XuLy", "QuanLy"))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <input type="text" name="key" value="" placeholder="Nhập mã đọc giả" />
+                <input type="submit" name="submit" value="Tìm kiếm" />
+            </div>
+        }
+    </div>
+</div>
+<p>
+    <a asp-action="Create" class="btn btn-default">Tạo tài khoản mới</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IDDocGia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaiKhoan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MatKhau)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HoTen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgaySinh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LoaiDocGia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiaChi)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IDDocGia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaiKhoan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MatKhau)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoTen)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgaySinh)
+                </td>
+                <td>
+                    @if (item.LoaiDocGia == 0)
+                    {
+                        @:Giảng viên
+                    }
+                    @if (item.LoaiDocGia == 1)
+                    {
+                        @:Sinh Viên
+                    }
+                    @if (item.LoaiDocGia == 2)
+                    {
+                        @:Nghề nghiệp khác
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiaChi)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.IDDocGia }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IDDocGia })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,99 @@
+﻿@model IEnumerable<QuanLyThuVien.ViewModels.viewMuonSach>
+
+@{
+    ViewData["Title"] = "Danh sách mượn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Các sách đã mượn</h2>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IDPhieu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenDocGia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenSach)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenNhanVien)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenChiNhanh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TinhTrangSach)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhiMuon)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TienCoc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgayMuon)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrangThai)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDPhieu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenDocGia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenSach)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenNhanVien)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenChiNhanh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TinhTrangSach)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhiMuon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TienCoc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayMuon)
+            </td>
+            <td>
+                @if (item.TrangThai == 0)
+                {
+                    @:Đã đặt sách
+                }
+                @if (item.TrangThai == 1)
+                {
+                    @:Đang mượn sách
+                }
+                @if (item.TrangThai == 2)
+                {
+                    @:Đã trả sách
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
